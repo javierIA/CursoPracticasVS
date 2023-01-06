@@ -1,6 +1,6 @@
 import cv2
 import numpy as np 
-from pyzbar.pyzbar import decode
+from pyzbar.pyzbar import decode 
 
 
 cap = cv2.VideoCapture(0)
@@ -8,7 +8,6 @@ cap = cv2.VideoCapture(0)
 while cap.isOpened():
     _, frame = cap.read()
     # read the camera frame
-    cv2.imshow('frame', frame)
     # show the frame
     for barcode in decode(frame):
         decoded_data= barcode.data.decode('utf-8')
