@@ -3,23 +3,20 @@ import numpy as np
 
 cap = cv2.VideoCapture(0)
 
-redBajo1 = np.array([0, 100, 20], np.uint8)
-redAlto1 = np.array([8, 255, 255], np.uint8)
-
-redBajo2 = np.array([175, 100, 20], np.uint8)
-redAlto2 = np.array([179, 255, 255], np.uint8)
 
 while True:
     ret, frame = cap.read()
     if ret == True:
-        frameHSV = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        maskRed1 = cv2.inRange(frameHSV, redBajo1, redAlto1)
-        maskRed2 = cv2.inRange(frameHSV, redBajo2, redAlto2)
-        maskRed = cv2.add(maskRed1, maskRed2)
-        maskRedvis = cv2.bitwise_and(frame, frame, mask=maskRed)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        hearcascade = cv2.CascadeClassifier(
+            'haarcascade_frontalface_default.xml')
+        faces = hearcascade.detectMultiScale(gray, 1.1, 5)
+
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
         cv2.imshow('frame', frame)
-        cv2.imshow('maskRed', maskRed)
-        cv2.imshow('maskRedvis', maskRedvis)
+
         if cv2.waitKey(1) & 0xFF == ord('s'):
             break
 cap.release()
