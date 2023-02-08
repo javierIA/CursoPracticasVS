@@ -1,3 +1,7 @@
 /mp_env
 ./mp_env
-.pyc 
+.pyc
+/.env 
+/.env/
+/.env/bin
+
