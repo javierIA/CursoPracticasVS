@@ -89,9 +89,9 @@ class BlinkDetector:
                     frame = self.drawing_output(
                         frame, coordinates_left_eye, coordinates_right_eye)
                     # if i > 70:
-                    #line1 = plotting_ear(pts_ear, line1)
+                    # line1 = plotting_ear(pts_ear, line1)
 
-                    #print("pts_ear:", pts_ear)
+                    # print("pts_ear:", pts_ear)
                 cv2.imshow("Frame", frame)
                 k = cv2.waitKey(1) & 0xFF
                 if k == 27:
